@@ -45,3 +45,6 @@
 .shimmer-card  > img {
     width: 100%;
 }
+.menu {
+    display: flex;
+}
