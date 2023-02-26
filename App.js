@@ -59,7 +59,7 @@
     
     */
 
-import React from "react";
+import React ,{lazy ,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 // default import
 import Header from "./src/components/Header";
@@ -72,6 +72,13 @@ import Contact from "./src/components/Contact";
 import RestrauntMenu from "./src/components/RestrauntMenu";
 import Profile from "./src/components/Profile";
 import ProfileClass from "./src/components/ProfileClass";
+import Shimmer from "./src/components/Shimmer";
+// import Instamart from "./src/components/Instamart";
+
+const Instamart  = lazy(()=>import('./src/components/Instamart'))
+// upon on on-demand loading -> upon render -> suspend loading
+
+
 const AppLayout = () => {
   return (
     <>
@@ -102,9 +109,14 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/instamart",
+        element: <Suspense fallback={<Shimmer />}><Instamart /></Suspense>,
+      },
+      {
         path: "/restaurant/:resId",
         element: <RestrauntMenu />,
       },
+
     ],
   },
 ]);

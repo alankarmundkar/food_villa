@@ -3,19 +3,21 @@ import RestrauntCard from "./RestrauntCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
+import {filterData} from '../utils/helper'
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filterRestaurants, setFilterRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  function filterData(searchInput, allRestaurants) {
-    const filterData = allRestaurants?.filter((restaurant) =>
-      (restaurant?.data?.name).toLowerCase().includes(searchInput.toLowerCase())
-    );
-    console.log(filterData, "alankar mundkar");
-    return filterData;
-  }
+  // function filterData(searchInput, allRestaurants) {
+  //   const filterData = allRestaurants?.filter((restaurant) =>
+  //     (restaurant?.data?.name).toLowerCase().includes(searchInput.toLowerCase())
+  //   );
+  //   console.log(filterData, "alankar mundkar");
+  //   return filterData;
+  // }
 
   const getRestaurant = async () => {
     const repsonse = await fetch(
@@ -31,8 +33,10 @@ const Body = () => {
     getRestaurant();
   }, []);
 
-  // not rendered component (early return)
-  if (!allRestaurants) return null;
+  const isOnline = useOnline()
+
+  if(!isOnline)
+    return <h1> 🔴 Looks like you are offline , Check your internet Connectivity</h1>
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />
@@ -61,8 +65,8 @@ const Body = () => {
       <div className="restaurant-list">
         {filterRestaurants?.map((restaurant) => {
           return (
-            <Link to={"/restaurant/"+restaurant?.data?.id}>
-              <RestrauntCard {...restaurant?.data} key={restaurant?.data?.id} />
+            <Link to={"/restaurant/"+restaurant?.data?.id} key={restaurant?.data?.id} >
+              <RestrauntCard {...restaurant?.data} />
             </Link>
           );
         })}
