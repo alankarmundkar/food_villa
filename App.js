@@ -74,6 +74,9 @@ import Profile from "./src/components/Profile";
 import ProfileClass from "./src/components/ProfileClass";
 import Shimmer from "./src/components/Shimmer";
 // import Instamart from "./src/components/Instamart";
+import { Provider } from "react-redux";
+import store from "./src/utils/store";
+import Cart from "./src/components/Cart";
 
 const Instamart  = lazy(()=>import('./src/components/Instamart'))
 // upon on on-demand loading -> upon render -> suspend loading
@@ -81,11 +84,11 @@ const Instamart  = lazy(()=>import('./src/components/Instamart'))
 
 const AppLayout = () => {
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </Provider>
   );
 };
 
@@ -111,6 +114,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: <Suspense fallback={<Shimmer />}><Instamart /></Suspense>,
+      },
+      {
+        path: "/cart",
+        element: <Suspense fallback={<Shimmer />}><Cart /></Suspense>,
       },
       {
         path: "/restaurant/:resId",

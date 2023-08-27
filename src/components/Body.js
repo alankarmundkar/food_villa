@@ -7,32 +7,34 @@ import useOnline from "../utils/useOnline";
 import {filterData} from '../utils/helper'
 
 const Body = () => {
+
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filterRestaurants, setFilterRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  // function filterData(searchInput, allRestaurants) {
-  //   const filterData = allRestaurants?.filter((restaurant) =>
-  //     (restaurant?.data?.name).toLowerCase().includes(searchInput.toLowerCase())
-  //   );
-  //   console.log(filterData, "alankar mundkar");
-  //   return filterData;
-  // }
-
-  const getRestaurant = async () => {
-    const repsonse = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0041346&lng=73.1091429&page_type=DESKTOP_WEB_LISTING"
-    );
-    const data = await repsonse.json();
-    console.log(data, "data123");
-    console.log(data.data?.cards[2]?.data?.data?.cards, "cards");
-    setAllRestaurants(data?.data?.cards[2]?.data?.data?.cards);
-    setFilterRestaurants(data?.data?.cards[2]?.data?.data?.cards);
-  };
+  const  getRestaurant = async ()=> {
+        // const position = await new Promise((resolve, reject) => {
+        //   navigator.geolocation.getCurrentPosition(resolve, reject);
+        // });
+        // const latitude = position.coords.latitude;
+        // const longitude = position.coords.longitude;
+        const response = await fetch(
+          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0041346&lng=73.1091429&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        );
+        const json = await response.json();
+        setAllRestaurants(
+          json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
+        setFilterRestaurants(
+          json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
+      } 
+  
   useEffect(() => {
     getRestaurant();
   }, []);
 
+  console.log(filterRestaurants,'filterRestaurants')
   const isOnline = useOnline()
 
   if(!isOnline)
@@ -66,8 +68,10 @@ const Body = () => {
       <div className="flex flex-wrap">
         {filterRestaurants?.map((restaurant) => {
           return (
-            <Link to={"/restaurant/"+restaurant?.data?.id} key={restaurant?.data?.id} >
-              <RestrauntCard {...restaurant?.data} />
+            <Link 
+              to={"/restaurant/"+restaurant?.info.id} 
+              key={restaurant?.info.id} >
+              <RestrauntCard {...restaurant?.info} />
             </Link>
           );
         })}
