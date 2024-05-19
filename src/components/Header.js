@@ -3,13 +3,14 @@ import { useContext, useState } from "react";
 import UserContext from "../utils/UserContext.js";
 import useOnline from "../utils/useOnline.js";
 import {useSelector} from 'react-redux'
+import logo from './../assets/food-villa.png'
 
 const Title = () => (
   <a href="/">
     <img
       className="h-28 p-2"
       alt="logo"
-      src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
+      src= {logo}
     />
   </a>
 );
@@ -19,8 +20,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const { user } = useContext(UserContext);
   const isOnline = useOnline();
-  const cartItems = useSelector((store)=> store.cart.items)
-
+  const cartItems = useSelector(store=> store.cart.items)
+  
   return (
     <div className="flex justify-between bg-pink-50">
       <Title />

@@ -28,8 +28,8 @@ class About extends React.Component{
         return(
             <div>
                 <h1>About US</h1>
-                {/* <Outlet/> */}
-                <Profile name ={'Alankar'} />
+                <Outlet/>
+                {/* <Profile name ={'Alankar'} /> */}
                 {/* <ProfileClass  name ={'First Class'}/> */}
                 {/* <ProfileClass  name ={'Second Class'}/> */}
             </div>

@@ -10,7 +10,7 @@ const RestrauntCard = ({
     <div className="card w-56 p-2 m-2 bg-pink-50 shadow-lg">
       <img
         src={
-          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
           cloudinaryImageId
         }
       />

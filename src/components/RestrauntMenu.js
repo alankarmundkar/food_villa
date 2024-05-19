@@ -14,7 +14,7 @@ const RestrauntMenu = () => {
   const handleAddItem = (item) => {
     dispatch(addItem(item));
   };
-
+ 
   return restaurant ? (
     <div className="flex gap-5">
       <div>
@@ -44,9 +44,9 @@ const RestrauntMenu = () => {
                     <h1>{category?.card?.card.title}</h1>
                     {category?.card?.card.itemCards.map((item) => {
                       return (
-                        <li>
-                          {item?.card.info?.name} : 
-                            Rupees: {item?.card.info?.price/100}
+                        <li key={item?.card.info?.name}>
+                          {item?.card.info?.name} : Rupees:{" "}
+                          {item?.card.info?.price / 100}
                           <button
                             className="bg-green-300 m-3"
                             onClick={() => {
