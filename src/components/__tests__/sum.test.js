@@ -1,5 +1,7 @@
 import { sum } from "../sum"
 
 test("Check sum of two positive numbers",() => {
-    expect (sum(2,3)).toBe(5)
+    const result = sum(4,3)
+    // Assertion 
+    expect(result).toBe(7)
 })

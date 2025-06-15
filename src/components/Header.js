@@ -3,21 +3,21 @@ import { useContext, useState } from "react";
 import UserContext from "../utils/UserContext.js";
 import useOnline from "../utils/useOnline.js";
 import {useSelector} from 'react-redux'
-import logo from './../assets/food-villa.png'
+
 
 const Title = () => (
   <a href="/">
     <img
       className="h-28 p-2"
       alt="logo"
-      src= {logo}
+      src= {'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Swiggy_logo.svg/1280px-Swiggy_logo.svg.png'}
     />
   </a>
 );
 
 const Header = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user } = useContext(UserContext);
   const isOnline = useOnline();
   const cartItems = useSelector(store=> store.cart.items)
@@ -40,7 +40,7 @@ const Header = () => {
             <Link to={"/instamart"}>Instamart</Link>
           </li>
           <li className="px-2">
-            <Link to={"/cart"}>Cart - {cartItems.length}</Link>
+            <Link to={"/cart"}>Cart - {cartItems.length} items</Link>
           </li>
         </ul>
       </div>
@@ -51,7 +51,7 @@ const Header = () => {
           </li>
           <li className="px-2">{user.name}</li>
           <li className="px-2">
-            <button onClick={() => setIsLoggedIn(isLoggedIn ? false : true)}>
+            <button  onClick={() => setIsLoggedIn(isLoggedIn ? false : true)}>
               {isLoggedIn ? "Logout" : "Login"}
             </button>
           </li>

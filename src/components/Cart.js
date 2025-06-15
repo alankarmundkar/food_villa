@@ -19,14 +19,14 @@ const Cart = () => {
             handleClearCart()
         }} >Clear Cart</button>
         <div className="flex">
-       {cartItems.map((item)=>{
+       {cartItems.length ? cartItems.map((item)=>{
             return(
                 <FoodItem
                     key={item.id}
                     {...item}
                  />
             )
-       })}
+       }) : <h1>Cart is Clear</h1>}
        </div>
     </div>
     )

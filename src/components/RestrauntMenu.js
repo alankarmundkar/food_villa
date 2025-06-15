@@ -19,34 +19,35 @@ const RestrauntMenu = () => {
     <div className="flex gap-5">
       <div>
         <h1>Restraunt id: {resId}</h1>{" "}
-        <h2>{restaurant?.cards[0]?.card?.card?.info.name}</h2>
+        <h2>{restaurant?.cards[2]?.card?.card?.info.name}</h2>
         <img
           className="m-auto"
           src={
             IMG_CDN_URL +
-            restaurant?.cards[0]?.card?.card?.info.cloudinaryImageId
+            restaurant?.cards[2]?.card?.card?.info.cloudinaryImageId
           }
         />
-        <h3>{restaurant?.cards[0]?.card?.card?.info.areaName}</h3>
-        <h3>{restaurant?.cards[0]?.card?.card?.info.city}</h3>
-        <h3>{restaurant?.cards[0]?.card?.card?.info.avgRating} stars</h3>
-        <h3>{restaurant?.cards[0]?.card?.card?.info.costForTwoMessage}</h3>
+        <h3>{restaurant?.cards[2]?.card?.card?.info.areaName}</h3>
+        <h3>{restaurant?.cards[2]?.card?.card?.info.city}</h3>
+        <h3>{restaurant?.cards[2]?.card?.card?.info.avgRating} stars</h3>
+        <h3>{restaurant?.cards[2]?.card?.card?.info.costForTwoMessage}</h3>
       </div>
       <div>
         <h1>Menu</h1>
 
         {restaurant &&
-          restaurant?.cards[2].groupedCard.cardGroupMap.REGULAR.cards.map(
+          restaurant?.cards[4].groupedCard.cardGroupMap.REGULAR.cards.map(
             (category) => {
               if (category?.card?.card.itemCards) {
                 return (
-                  <div>
+                  <div data-testid = {`menu-${category?.card?.card.title}`}>
                     <h1>{category?.card?.card.title}</h1>
-                    {category?.card?.card.itemCards.map((item) => {
+                    {category?.card?.card.itemCards.map((item,index) => {
                       return (
-                        <li key={item?.card.info?.name}>
+                        <li key={item?.card.info?.name+index} data-testid = 'menu-items'>
+                          {index}
                           {item?.card.info?.name} : Rupees:{" "}
-                          {item?.card.info?.price / 100}
+                          {item?.card.info?.price / 100 || item?.card.info?.defaultPrice /100 }
                           <button
                             className="bg-green-300 m-3"
                             onClick={() => {
