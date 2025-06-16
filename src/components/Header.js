@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext.js";
 import useOnline from "../utils/useOnline.js";
 import {useSelector} from 'react-redux'
+import foodVillaLogo from './../assets/food-villa.png'
+import apiSlice from "../utils/apiSlice.js";
 
 
 const Title = () => (
@@ -10,7 +12,7 @@ const Title = () => (
     <img
       className="h-28 p-2"
       alt="logo"
-      src= {'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Swiggy_logo.svg/1280px-Swiggy_logo.svg.png'}
+      src= {foodVillaLogo}
     />
   </a>
 );
@@ -21,6 +23,11 @@ const Header = () => {
   const { user } = useContext(UserContext);
   const isOnline = useOnline();
   const cartItems = useSelector(store=> store.cart.items)
+
+  // const getTodoFn = apiSlice.usePrefetch('getTodo')
+  // useEffect(()=>{
+  //   getTodoFn(1)
+  // },[])
   
   return (
     <div className="flex justify-between bg-pink-50">

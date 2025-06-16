@@ -77,11 +77,13 @@ import Shimmer from "./src/components/Shimmer";
 import { Provider } from "react-redux";
 import store from "./src/utils/store";
 import Cart from "./src/components/Cart";
+import ToDoList from "./src/components/ToDoList";
+import apiSlice from "./src/utils/apiSlice";
 
 const Instamart  = lazy(()=>import('./src/components/Instamart'))
 // upon on on-demand loading -> upon render -> suspend loading
 
-
+// store.dispatch(apiSlice.endpoints.getTodo.initiate(2)) you can use if the component is outsied the provide
 const AppLayout = () => {
   return (
     <Provider store={store}>
@@ -123,6 +125,10 @@ const appRouter = createBrowserRouter([
         path: "/restaurant/:resId",
         element: <RestrauntMenu />,
       },
+      {
+        path: '/todolist',
+        element: <ToDoList/>
+      }
 
     ],
   },
